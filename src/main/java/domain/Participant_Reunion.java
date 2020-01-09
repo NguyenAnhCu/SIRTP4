@@ -1,9 +1,12 @@
 package domain;
 
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import java.io.Serializable;
 
+@Entity
 public class Participant_Reunion implements Serializable {
-
+    @EmbeddedId
     Participant_ReunionPK participant_reunionPK;
     String code;
 

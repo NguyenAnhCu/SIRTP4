@@ -22,6 +22,8 @@ public class Reponse implements Serializable {
         this.auteur = auteur;
     }
 
+    @Id
+    @GeneratedValue
     public Long getId() {
         return id;
     }
@@ -30,6 +32,7 @@ public class Reponse implements Serializable {
         this.id = id;
     }
 
+    @ManyToOne
     public Sondage getSondage() {
         return sondage;
     }
@@ -46,6 +49,7 @@ public class Reponse implements Serializable {
         this.dateReponse = dateReponse;
     }
 
+    @ManyToOne
     public Participant getAuteur() {
         return auteur;
     }

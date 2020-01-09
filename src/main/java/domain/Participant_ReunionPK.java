@@ -1,7 +1,9 @@
 package domain;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
+@Embeddable
 public class Participant_ReunionPK implements Serializable {
     private static final long serialVersionUID = 1L;
 

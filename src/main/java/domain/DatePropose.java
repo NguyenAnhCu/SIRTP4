@@ -1,9 +1,12 @@
 package domain;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
 public class DatePropose implements Serializable {
     private Long id;
+    @Temporal(TemporalType.DATE)
     private Date  dateProsopes;
     private boolean Pause;
 
@@ -15,6 +18,8 @@ public class DatePropose implements Serializable {
         Pause = pause;
     }
 
+    @Id
+    @GeneratedValue
     public Long getId() {
         return id;
     }

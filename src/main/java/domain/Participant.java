@@ -1,8 +1,10 @@
 package domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+@Entity
 public class Participant implements Serializable {
 
     private String Email;
@@ -15,6 +17,7 @@ public class Participant implements Serializable {
     public Participant(){
     }
 
+    @Id
     public String getEmail() {
         return Email;
     }
@@ -39,20 +42,21 @@ public class Participant implements Serializable {
     public void setPreNom(String preNom) {
         this.preNom = preNom;
     }
-
+    @ManyToMany
     public List<Alimentation> getPreferences() {
         return preferences;
     }
     public void setPreferences(List<Alimentation> preferences) {
         this.preferences = preferences;
     }
-
+    @ManyToMany
     public List<Alimentation> getAllergies() {
         return allergies;
     }
     public void setAllergies(List<Alimentation> allergies) {
         this.allergies = allergies;
     }
+    @OneToMany(mappedBy = "createur", cascade = CascadeType.PERSIST)
     public List<Sondage> getSondages() {
         return sondages;
     }

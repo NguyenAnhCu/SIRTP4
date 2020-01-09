@@ -1,8 +1,10 @@
 package domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+@Entity
 public class Sondage implements Serializable {
     Long id;
     String lien;
@@ -21,6 +23,8 @@ public class Sondage implements Serializable {
         this.reponses = reponses;
     }
 
+    @Id
+    @GeneratedValue
     public Long getId() {
         return id;
     }
@@ -29,6 +33,7 @@ public class Sondage implements Serializable {
         this.id = id;
     }
 
+    @ManyToOne
     public Participant getCreateur() {
         return createur;
     }
@@ -45,6 +50,7 @@ public class Sondage implements Serializable {
         this.lien = lien;
     }
 
+    @ManyToOne
     public Reunion getReunion() {
         return reunion;
     }
@@ -52,6 +58,7 @@ public class Sondage implements Serializable {
         this.reunion = reunion;
     }
 
+    @OneToMany(mappedBy = "sondage")
     public List<Reponse> getReponses() {
         return reponses;
     }
