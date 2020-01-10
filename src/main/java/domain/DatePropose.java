@@ -7,14 +7,15 @@ import java.util.Date;
 public class DatePropose implements Serializable {
     private Long id;
     @Temporal(TemporalType.DATE)
-    private Date  dateProsopes;
+    @Column(nullable=false)
+    private Date dateProsope;
     private boolean Pause;
 
     public DatePropose(){
     }
 
     public DatePropose(Date dateProsopes, boolean pause) {
-        this.dateProsopes = dateProsopes;
+        this.dateProsope = dateProsopes;
         Pause = pause;
     }
 
@@ -28,12 +29,12 @@ public class DatePropose implements Serializable {
         this.id = id;
     }
 
-    public Date getDateProsopes() {
-        return dateProsopes;
+    public Date getDateProsope() {
+        return dateProsope;
     }
 
-    public void setDateProsopes(Date dateProsopes) {
-        this.dateProsopes = dateProsopes;
+    public void setDateProsope(Date dateProsope) {
+        this.dateProsope = dateProsope;
     }
 
     public boolean isPause() {

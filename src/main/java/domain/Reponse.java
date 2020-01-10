@@ -9,14 +9,15 @@ public class Reponse implements Serializable {
     Long id;
     Sondage sondage;
     @Temporal(TemporalType.DATE)
-    Date dateReponse;
+    @Column(nullable=false)
+    DatePropose dateReponse;
     Participant auteur;
 
     public Reponse(){
 
     }
 
-    public Reponse(Sondage sondage, Date dateReponse, Participant auteur) {
+    public Reponse(Sondage sondage, DatePropose dateReponse, Participant auteur) {
         this.sondage = sondage;
         this.dateReponse = dateReponse;
         this.auteur = auteur;
@@ -41,11 +42,12 @@ public class Reponse implements Serializable {
         this.sondage = sondage;
     }
 
-    public Date getDateReponse() {
+    @ManyToOne
+    public DatePropose getDateReponse() {
         return dateReponse;
     }
 
-    public void setDateReponse(Date dateReponse) {
+    public void setDateReponse(DatePropose dateReponse) {
         this.dateReponse = dateReponse;
     }
 

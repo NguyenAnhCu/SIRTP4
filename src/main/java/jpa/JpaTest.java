@@ -1,12 +1,10 @@
 package jpa;
 
-import domain.Participant;
-import domain.Reponse;
-import domain.Reunion;
-import domain.Sondage;
+import domain.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.Date;
 
 public class JpaTest {
 
@@ -20,6 +18,12 @@ public class JpaTest {
 		tx.begin();
 
 		try {
+			Date toDay = new Date();
+			DatePropose datePropose = new DatePropose();
+			datePropose.setPause(true);
+			datePropose.setDateProsope(toDay);
+			manager.persist(datePropose);
+
 			Sondage sondage = new Sondage() ;
 			Participant p1 = new Participant();
 			p1.setEmail("kouassives@gmail.com");
@@ -38,8 +42,10 @@ public class JpaTest {
 			Reponse r2 = new Reponse();
 			r1.setAuteur(p1);
 			r1.setSondage(sondage);
-			r2.setSondage(sondage);
+			r1.setDateReponse(datePropose);
 			r2.setAuteur(p2);
+			r2.setSondage(sondage);
+			r2.setDateReponse(datePropose);
 
 
 			manager.persist(reunion);
