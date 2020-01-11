@@ -2,6 +2,7 @@ package domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -11,22 +12,13 @@ public class Reunion implements Serializable {
     String resume;
     String dateValide;
     String lienPad;
-    List<Participant> participants;
     List<Sondage> sondages;
     List<DatePropose> dateProposes;
+    List<Assidute> assidute;
 
     public Reunion(){
     }
 
-    public Reunion(String intitule, String resume, String dateValide, String lienPad, List<Participant> participants, List<Sondage> sondages, List<DatePropose> dateProposes) {
-        this.intitule = intitule;
-        this.resume = resume;
-        this.dateValide = dateValide;
-        this.lienPad = lienPad;
-        this.participants = participants;
-        this.sondages = sondages;
-        this.dateProposes = dateProposes;
-    }
 
     @Id
     @GeneratedValue
@@ -54,11 +46,13 @@ public class Reunion implements Serializable {
         this.resume = resume;
     }
 
-    public String getDateValide() {
+    @ManyToOne
+    @JoinColumn(name = "DATE_VALIDE")
+    public DatePropose getDateValide() {
         return dateValide;
     }
 
-    public void setDateValide(String dateValide) {
+    public void setDateValide(DatePropose dateValide) {
         this.dateValide = dateValide;
     }
 
@@ -70,14 +64,6 @@ public class Reunion implements Serializable {
         this.lienPad = lienPad;
     }
 
-    @ManyToMany()
-    public List<Participant> getParticipants() {
-        return participants;
-    }
-
-    public void setParticipants(List<Participant> participants) {
-        this.participants = participants;
-    }
     @OneToMany(mappedBy = "reunion", cascade = CascadeType.PERSIST)
     public List<Sondage> getSondages() {
         return sondages;
@@ -86,12 +72,21 @@ public class Reunion implements Serializable {
     public void setSondages(List<Sondage> sondages) {
         this.sondages = sondages;
     }
-    @OneToMany
+    @ManyToMany
     public List<DatePropose> getDateProposes() {
         return dateProposes;
     }
 
     public void setDateProposes(List<DatePropose> dateProposes) {
         this.dateProposes = dateProposes;
+    }
+
+    @OneToMany(mappedBy = "reunion", cascade = CascadeType.PERSIST)
+    public List<Assidute> getAssidute() {
+        return assidute;
+    }
+
+    public void setAssidute(List<Assidute> assidute) {
+        this.assidute = assidute;
     }
 }

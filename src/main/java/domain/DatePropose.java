@@ -6,8 +6,6 @@ import java.util.Date;
 @Entity
 public class DatePropose implements Serializable {
     private Long id;
-    @Temporal(TemporalType.DATE)
-    @Column(nullable=false)
     private Date dateProsope;
     private boolean Pause;
 
@@ -29,6 +27,8 @@ public class DatePropose implements Serializable {
         this.id = id;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(nullable=false)
     public Date getDateProsope() {
         return dateProsope;
     }

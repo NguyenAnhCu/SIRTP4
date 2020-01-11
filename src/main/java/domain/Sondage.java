@@ -8,7 +8,7 @@ import java.util.List;
 public class Sondage implements Serializable {
     Long id;
     String lien;
-    Participant createur;
+    Utilisateur createur;
     Reunion reunion;
     List<Reponse> reponses;
 
@@ -16,7 +16,7 @@ public class Sondage implements Serializable {
 
     }
 
-    public Sondage(String lien, Participant createur, Reunion reunion, List<Reponse> reponses) {
+    public Sondage(String lien, Utilisateur createur, Reunion reunion, List<Reponse> reponses) {
         this.lien = lien;
         this.createur = createur;
         this.reunion = reunion;
@@ -34,11 +34,11 @@ public class Sondage implements Serializable {
     }
 
     @ManyToOne
-    public Participant getCreateur() {
+    public Utilisateur getCreateur() {
         return createur;
     }
 
-    public void setCreateur(Participant createur) {
+    public void setCreateur(Utilisateur createur) {
         this.createur = createur;
     }
 

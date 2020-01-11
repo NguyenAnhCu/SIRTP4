@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Participant implements Serializable {
+public class Utilisateur implements Serializable {
 
     private String Email;
     private String nom;
@@ -14,7 +14,19 @@ public class Participant implements Serializable {
     private List<Alimentation> allergies;
     private List<Sondage> sondages;
 
-    public Participant(){
+    List<Assidute> assidute;
+
+    public Utilisateur(){
+
+    }
+
+    public Utilisateur(String nom, String preNom, List<Alimentation> preferences, List<Alimentation> allergies, List<Sondage> sondages, List<Assidute> assidute) {
+        this.nom = nom;
+        this.preNom = preNom;
+        this.preferences = preferences;
+        this.allergies = allergies;
+        this.sondages = sondages;
+        this.assidute = assidute;
     }
 
     @Id
@@ -63,5 +75,15 @@ public class Participant implements Serializable {
     public void setSondages(List<Sondage> sondages) {
         this.sondages = sondages;
     }
+
+    @OneToMany(mappedBy = "participant", cascade = CascadeType.PERSIST)
+    public List<Assidute> getAssidute() {
+        return assidute;
+    }
+
+    public void setAssidute(List<Assidute> assidute) {
+        this.assidute = assidute;
+    }
+
 
 }

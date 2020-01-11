@@ -27,7 +27,6 @@ public class Alimentation implements Serializable {
         this.id = id;
     }
 
-
     public String getLibelle() {
         return libelle;
     }

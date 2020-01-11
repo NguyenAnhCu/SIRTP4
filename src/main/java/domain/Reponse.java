@@ -2,22 +2,21 @@ package domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 public class Reponse implements Serializable {
     Long id;
     Sondage sondage;
-    @Temporal(TemporalType.DATE)
+
     @Column(nullable=false)
     DatePropose dateReponse;
-    Participant auteur;
+    Utilisateur auteur;
 
     public Reponse(){
 
     }
 
-    public Reponse(Sondage sondage, DatePropose dateReponse, Participant auteur) {
+    public Reponse(Sondage sondage, DatePropose dateReponse, Utilisateur auteur) {
         this.sondage = sondage;
         this.dateReponse = dateReponse;
         this.auteur = auteur;
@@ -52,11 +51,11 @@ public class Reponse implements Serializable {
     }
 
     @ManyToOne
-    public Participant getAuteur() {
+    public Utilisateur getAuteur() {
         return auteur;
     }
 
-    public void setAuteur(Participant auteur) {
+    public void setAuteur(Utilisateur auteur) {
         this.auteur = auteur;
     }
 }
