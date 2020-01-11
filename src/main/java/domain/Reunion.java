@@ -10,7 +10,8 @@ public class Reunion implements Serializable {
     Long Id;
     String intitule;
     String resume;
-    String dateValide;
+
+    DatePropose dateValide;
     String lienPad;
     List<Sondage> sondages;
     List<DatePropose> dateProposes;

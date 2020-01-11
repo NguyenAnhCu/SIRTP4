@@ -54,9 +54,9 @@
             <property name="hibernate.archive.autodetection" value="class, hbm"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-            <property name="hibernate.connection.password" value="7I7IbqXj6j"/>
-            <property name="hibernate.connection.url" value="jdbc:mysql://remotemysql.com:3306/38P2jSOAjM"/>
-            <property name="hibernate.connection.username" value="38P2jSOAjM"/>
+            <property name="hibernate.connection.password" value="oKJ8z5sEEK"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://remotemysql.com:3306/BjQOx1bT9L"/>
+            <property name="hibernate.connection.username" value="BjQOx1bT9L"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="hibernate.c3p0.min_size" value="5"/>
             <property name="hibernate.c3p0.max_size" value="20"/>
