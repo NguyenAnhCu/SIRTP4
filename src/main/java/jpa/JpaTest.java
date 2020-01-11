@@ -66,19 +66,22 @@ public class JpaTest {
 		r2.setSondage(sondage);
 		r2.setDateReponse(datePropose);
 
-		// Creation d'une assidute
 
+
+		// Creation participant pour generer les id
+		manager.persist(p1);
+		manager.persist(reunion);
+
+		// Creation d'une assidute
 		Assidute assidute = new Assidute();
 		assidute.setParticipant(p1);
 		assidute.setReunion(reunion);
+		manager.persist(assidute);
 
-        manager.persist(reunion);
         manager.persist(sondage);
-        manager.persist(p1);
         manager.persist(p2);
         manager.persist(r1);
         manager.persist(r2);
-        manager.persist(assidute);
     }
 
 	private void readDataBase(){

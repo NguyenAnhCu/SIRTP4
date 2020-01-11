@@ -63,6 +63,7 @@ public class Assidute implements Serializable {
 
     public void setReunion(Reunion reunion) {
         this.reunion = reunion;
+        idReunion = reunion.getId();
     }
 
     @ManyToOne( cascade = CascadeType.PERSIST )
@@ -73,5 +74,6 @@ public class Assidute implements Serializable {
 
     public void setParticipant(Utilisateur participant) {
         this.participant = participant;
+        emailParticipant = participant.getEmail();
     }
 }
