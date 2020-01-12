@@ -41,7 +41,7 @@ public class JpaTest {
 		DatePropose datePropose = new DatePropose();
 		datePropose.setPause(true);
 		datePropose.setDateProsope(toDay);
-		manager.persist(datePropose);
+
 
 		Sondage sondage = new Sondage() ;
 		Utilisateur p1 = new Utilisateur();
@@ -55,6 +55,7 @@ public class JpaTest {
 		Reunion reunion = new Reunion();
 		reunion.setIntitule("RDV 1 : Projet PRO");
 		reunion.setResume("Choisir Le projet");
+		reunion.addDateProposes(datePropose);
 		sondage.setCreateur(p1);
 		sondage.setReunion(reunion);
 		Reponse r1 = new Reponse();
@@ -71,7 +72,7 @@ public class JpaTest {
 		// Creation participant pour generer les id
 		manager.persist(p1);
 		manager.persist(reunion);
-
+        manager.persist(datePropose);
 		// Creation d'une assidute
 		Assidute assidute = new Assidute();
 		assidute.setParticipant(p1);

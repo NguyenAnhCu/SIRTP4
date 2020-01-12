@@ -2,6 +2,7 @@ package domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,7 +11,7 @@ public class Sondage implements Serializable {
     String lien;
     Utilisateur createur;
     Reunion reunion;
-    List<Reponse> reponses;
+    List<Reponse> reponses = new ArrayList<Reponse>();
 
     public Sondage(){
 

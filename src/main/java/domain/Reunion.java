@@ -2,6 +2,7 @@ package domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,9 +14,9 @@ public class Reunion implements Serializable {
 
     DatePropose dateValide;
     String lienPad;
-    List<Sondage> sondages;
-    List<DatePropose> dateProposes;
-    List<Assidute> assidute;
+    List<Sondage> sondages = new ArrayList<Sondage>();
+    List<DatePropose> dateProposes = new ArrayList<DatePropose>();
+    List<Assidute> assidute = new ArrayList<Assidute>();
 
     public Reunion(){
     }
@@ -80,6 +81,10 @@ public class Reunion implements Serializable {
 
     public void setDateProposes(List<DatePropose> dateProposes) {
         this.dateProposes = dateProposes;
+    }
+
+    public void addDateProposes(DatePropose datePropose){
+        dateProposes.add(datePropose);
     }
 
     @OneToMany(mappedBy = "reunion", cascade = CascadeType.PERSIST)
