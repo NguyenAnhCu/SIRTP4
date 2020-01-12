@@ -1,7 +1,6 @@
 package jpa;
 
 import domain.*;
-import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -50,10 +49,12 @@ public class JpaTest {
 		p1.setEmail("kouassives@gmail.com");
 		p1.setNom("KOUASSI");
 		p1.setPreNom("Yves");
+		manager.persist(p1);
 		Utilisateur p2 = new Utilisateur();
 		p2.setEmail("kouassives@live.com");
 		p2.setNom("TI");
 		p2.setPreNom("ANAIS");
+		manager.persist(p2);
 		Reunion reunion = new Reunion();
 		reunion.setIntitule("RDV 1 : Projet PRO");
 		reunion.setResume("Choisir Le projet");
@@ -61,31 +62,36 @@ public class JpaTest {
 		sondage.setCreateur(p1);
 		sondage.setReunion(reunion);
 		sondage.setType(Type.LIEU);
-		Reponse r1 = new ReponseDate();
-		Reponse r2 = new ReponseLieu();
-		r1.setAuteur(p1);
+		manager.persist(sondage);
+
+		Reponse r1 = new Reponse();
+		ReponsePK reponsePK1 = new ReponsePK(sondage.getId(),p1.getEmail());
+		Reponse r2 = new Reponse();
+		ReponsePK reponsePK2 = new ReponsePK(sondage.getId(),p2.getEmail());
+		r1.setReponsePK(reponsePK1);
+		r1.setParticipant(p1);
 		r1.setSondage(sondage);
 		r1.setDateReponse(datePropose);
-		r2.setAuteur(p2);
+		r2.setReponsePK(reponsePK2);
+		r2.setParticipant(p2);
 		r2.setSondage(sondage);
 		r2.setLieuPropose(lieuPropose);
 
 
 
 
+
 		// Creation participant pour generer les id
-		manager.persist(p1);
 		manager.persist(reunion);
         manager.persist(datePropose);
         manager.persist(lieuPropose);
+        manager.persist(r1);
+        manager.persist(r2);
 		// Creation d'une assidute
 		Assidute assidute = new Assidute();
 		assidute.setParticipant(p1);
 		assidute.setReunion(reunion);
 		manager.persist(assidute);
-
-        manager.persist(sondage);
-        manager.persist(p2);
         manager.persist(r1);
         manager.persist(r2);
     }

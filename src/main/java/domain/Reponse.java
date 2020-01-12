@@ -4,58 +4,81 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="TYPEREPONSE", discriminatorType = DiscriminatorType.STRING, length=5)
-public abstract class Reponse implements Serializable {
-    Long id;
-    Sondage sondage;
-    Utilisateur auteur;
-    private DatePropose dateReponse;
+public class Reponse implements Serializable {
+
+    protected ReponsePK reponsePK;
+    private Utilisateur participant;
+    private Sondage sondage;
+    private Type type;
+
+    DatePropose dateReponse;
+    LieuPropose lieuPropose;
+
 
     public Reponse(){
-
     }
 
-    public Reponse(Sondage sondage, Utilisateur auteur) {
+    public Reponse(Utilisateur participant, Sondage sondage) {
+        this.participant = participant;
         this.sondage = sondage;
-        this.auteur = auteur;
-    }
-
-    @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @ManyToOne
+    public DatePropose getDateReponse() {
+        return dateReponse;
+    }
+
+    public void setDateReponse(DatePropose dateReponse) {
+        this.dateReponse = dateReponse;
+    }
+
+    @ManyToOne
+    public LieuPropose getLieuPropose() {
+        return lieuPropose;
+    }
+
+    public void setLieuPropose(LieuPropose lieuPropose) {
+        this.lieuPropose = lieuPropose;
+    }
+
+    @EmbeddedId
+    protected ReponsePK getReponsePK() {
+        return reponsePK;
+    }
+
+    public void setReponsePK(ReponsePK reponsePK) {
+        this.reponsePK = reponsePK;
+    }
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "ID_UTILISATEUR",insertable = false, updatable = false)
+    public Utilisateur getParticipant() {
+        return participant;
+    }
+
+    public void setParticipant(Utilisateur participant) {
+        this.participant = participant;
+    }
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "ID_SONDAGE",insertable = false, updatable = false)
     public Sondage getSondage() {
         return sondage;
     }
 
     public void setSondage(Sondage sondage) {
         this.sondage = sondage;
+        // Intégrité
+        this.type = sondage.getType();
     }
 
-    @ManyToOne
-    public Utilisateur getAuteur() {
-        return auteur;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    public Type getType() {
+        return type;
     }
 
-    public void setAuteur(Utilisateur auteur) {
-        this.auteur = auteur;
+    public void setType(Type type) {
+        this.type = type;
     }
-
-    public void setDateReponse(DatePropose dateReponse) {
-    }
-
-    public void setLieuPropose(LieuPropose lieuPropose) {
-
-    }
-
-
-
 }
