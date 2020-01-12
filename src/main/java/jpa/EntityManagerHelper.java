@@ -4,6 +4,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+/**
+ * Utilisation de Pattern Singleton
+ * pour gérer l'unitcité de l'EntityManager dans l'application.
+ */
 public class EntityManagerHelper {
 
     private static final EntityManagerFactory emf; 
@@ -11,7 +15,7 @@ public class EntityManagerHelper {
 
     static {
         emf = Persistence.createEntityManagerFactory("mysql");
-        threadLocal = new ThreadLocal<EntityManager>();
+        threadLocal = new ThreadLocal<EntityManager>(); // Pattern Momento
     }
 
     public static EntityManager getEntityManager() {

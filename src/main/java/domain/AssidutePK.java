@@ -6,11 +6,20 @@ public class AssidutePK implements Serializable {
     private String emailParticipant;
     private Long idReunion;
 
+    /**
+     * Override obligatoire
+     * @return
+     */
     @Override
     public int hashCode() {
         return super.hashCode();
     }
 
+    /**
+     * Override obligatoire
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         return super.equals(o);

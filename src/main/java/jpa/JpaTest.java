@@ -41,6 +41,8 @@ public class JpaTest {
 		DatePropose datePropose = new DatePropose();
 		datePropose.setPause(true);
 		datePropose.setDateProsope(toDay);
+		LieuPropose lieuPropose = new LieuPropose();
+		lieuPropose.setLieu("PARIS");
 
 
 		Sondage sondage = new Sondage() ;
@@ -50,22 +52,24 @@ public class JpaTest {
 		p1.setPreNom("Yves");
 		Utilisateur p2 = new Utilisateur();
 		p2.setEmail("kouassives@live.com");
-		p2.setNom("KOUASSI");
-		p2.setPreNom("Yves");
+		p2.setNom("TI");
+		p2.setPreNom("ANAIS");
 		Reunion reunion = new Reunion();
 		reunion.setIntitule("RDV 1 : Projet PRO");
 		reunion.setResume("Choisir Le projet");
 		reunion.addDateProposes(datePropose);
 		sondage.setCreateur(p1);
 		sondage.setReunion(reunion);
-		Reponse r1 = new Reponse();
-		Reponse r2 = new Reponse();
+		sondage.setType(Type.LIEU);
+		Reponse r1 = new ReponseDate();
+		Reponse r2 = new ReponseLieu();
 		r1.setAuteur(p1);
 		r1.setSondage(sondage);
 		r1.setDateReponse(datePropose);
 		r2.setAuteur(p2);
 		r2.setSondage(sondage);
-		r2.setDateReponse(datePropose);
+		r2.setLieuPropose(lieuPropose);
+
 
 
 
@@ -73,6 +77,7 @@ public class JpaTest {
 		manager.persist(p1);
 		manager.persist(reunion);
         manager.persist(datePropose);
+        manager.persist(lieuPropose);
 		// Creation d'une assidute
 		Assidute assidute = new Assidute();
 		assidute.setParticipant(p1);

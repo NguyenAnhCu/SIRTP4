@@ -1,5 +1,7 @@
 package domain;
 
+import jdk.nashorn.internal.runtime.regexp.joni.Config;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,21 +9,15 @@ import java.util.List;
 
 @Entity
 public class Sondage implements Serializable {
-    Long id;
-    String lien;
-    Utilisateur createur;
-    Reunion reunion;
-    List<Reponse> reponses = new ArrayList<Reponse>();
+    private Long id;
+    private String lien;
+    private Utilisateur createur;
+    private Reunion reunion;
+    private List<Reponse> reponses = new ArrayList<Reponse>();
+    private Type type;
 
     public Sondage(){
 
-    }
-
-    public Sondage(String lien, Utilisateur createur, Reunion reunion, List<Reponse> reponses) {
-        this.lien = lien;
-        this.createur = createur;
-        this.reunion = reunion;
-        this.reponses = reponses;
     }
 
     @Id
@@ -66,5 +62,24 @@ public class Sondage implements Serializable {
 
     public void setReponses(List<Reponse> reponses) {
         this.reponses = reponses;
+    }
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public void addReponse(Reponse reponse) {
+        try{
+            reponses.add(reponse);
+        }catch (Exception e){
+            System.out.println("Reponse incompatible");
+
+        }
     }
 }

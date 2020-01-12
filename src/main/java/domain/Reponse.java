@@ -4,21 +4,20 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class Reponse implements Serializable {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="TYPEREPONSE", discriminatorType = DiscriminatorType.STRING, length=5)
+public abstract class Reponse implements Serializable {
     Long id;
     Sondage sondage;
-
-    @Column(nullable=false)
-    DatePropose dateReponse;
     Utilisateur auteur;
+    private DatePropose dateReponse;
 
     public Reponse(){
 
     }
 
-    public Reponse(Sondage sondage, DatePropose dateReponse, Utilisateur auteur) {
+    public Reponse(Sondage sondage, Utilisateur auteur) {
         this.sondage = sondage;
-        this.dateReponse = dateReponse;
         this.auteur = auteur;
     }
 
@@ -42,15 +41,6 @@ public class Reponse implements Serializable {
     }
 
     @ManyToOne
-    public DatePropose getDateReponse() {
-        return dateReponse;
-    }
-
-    public void setDateReponse(DatePropose dateReponse) {
-        this.dateReponse = dateReponse;
-    }
-
-    @ManyToOne
     public Utilisateur getAuteur() {
         return auteur;
     }
@@ -58,4 +48,14 @@ public class Reponse implements Serializable {
     public void setAuteur(Utilisateur auteur) {
         this.auteur = auteur;
     }
+
+    public void setDateReponse(DatePropose dateReponse) {
+    }
+
+    public void setLieuPropose(LieuPropose lieuPropose) {
+
+    }
+
+
+
 }
