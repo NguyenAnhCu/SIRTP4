@@ -28,8 +28,10 @@ public class Reponse implements Serializable {
         return dateReponse;
     }
 
-    public void setDateReponse(DatePropose dateReponse) {
-        this.dateReponse = dateReponse;
+    public void setDateReponse(DatePropose dateReponse) throws Exception {
+        if(type.equals(Type.DATE))
+            this.dateReponse = dateReponse;
+        else throw new Exception("le Type de votre reponse n'est pas "+ type +"\nET type de Reponse attendu pour ce objet doit être "+sondage.getType());
     }
 
     @ManyToOne
@@ -37,8 +39,10 @@ public class Reponse implements Serializable {
         return lieuPropose;
     }
 
-    public void setLieuPropose(LieuPropose lieuPropose) {
-        this.lieuPropose = lieuPropose;
+    public void setLieuPropose(LieuPropose lieuPropose) throws Exception {
+        if(type.equals(Type.LIEU))
+            this.lieuPropose = lieuPropose;
+        else throw new Exception("le Type de votre reponse n'est pas "+ type +",\nET type de Reponse attendu pour ce objet doit être "+sondage.getType());
     }
 
     @EmbeddedId
@@ -80,5 +84,14 @@ public class Reponse implements Serializable {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    @PrePersist
+    public void prePersist() throws Exception {
+        switch (type){
+            case LIEU: if (lieuPropose == null) throw new Exception("lieuReponse cannot be null"); break;
+            case DATE: if (dateReponse == null) throw new Exception("dateReponse cannot be null"); break;
+            case LIEUDATE: if(dateReponse == null | lieuPropose == null ) throw new Exception("lieuReponse and dateReponse cannot be null");break;
+        }
     }
 }
