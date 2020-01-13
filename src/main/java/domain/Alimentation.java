@@ -1,26 +1,31 @@
 package domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 public class Alimentation implements Serializable {
     private Long id;
     private String libelle;
+    private TypeAlimentation typeAlimentation;
 
     public Alimentation(){
     }
-    public Alimentation(String libelle) {
-        this.libelle = libelle;
-    }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public Long getId() {
         return id;
+    }
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    public TypeAlimentation getTypeAlimentation() {
+        return typeAlimentation;
+    }
+
+    public void setTypeAlimentation(TypeAlimentation typeAlimentation) {
+        this.typeAlimentation = typeAlimentation;
     }
 
     public void setId(Long id) {
@@ -34,4 +39,6 @@ public class Alimentation implements Serializable {
     public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
+
+
 }
