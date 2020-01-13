@@ -55,14 +55,18 @@ public class Utilisateur implements Serializable {
     public void setPreNom(String preNom) {
         this.preNom = preNom;
     }
-    @ManyToMany
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "Utilisateur_Preference", joinColumns = @JoinColumn(name = "utilisateur_id"), inverseJoinColumns = @JoinColumn(name = "preference_id"))
     public List<Alimentation> getPreferences() {
         return preferences;
     }
     public void setPreferences(List<Alimentation> preferences) {
         this.preferences = preferences;
     }
-    @ManyToMany
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "Utilisateur_Allergie", joinColumns = @JoinColumn(name = "utilisateur_id"), inverseJoinColumns = @JoinColumn(name = "allergie_id"))
     public List<Alimentation> getAllergies() {
         return allergies;
     }
@@ -84,6 +88,13 @@ public class Utilisateur implements Serializable {
 
     public void setAssidute(List<Assidute> assidute) {
         this.assidute = assidute;
+    }
+
+    public void addAllergies(Alimentation alimentation){
+        allergies.add(alimentation);
+    }
+    public void addPrefereneces(Alimentation alimentation){
+        preferences.add(alimentation);
     }
 
 

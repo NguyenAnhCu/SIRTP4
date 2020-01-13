@@ -12,10 +12,13 @@ public class Reunion implements Serializable {
     String intitule;
     String resume;
 
+    DatePropose lieuValide;
     DatePropose dateValide;
     String lienPad;
     List<Sondage> sondages = new ArrayList<Sondage>();
     List<DatePropose> dateProposes = new ArrayList<DatePropose>();
+    List<LieuPropose> lieuProposes = new ArrayList<LieuPropose>();
+
     List<Assidute> assidute = new ArrayList<Assidute>();
 
     public Reunion(){
@@ -48,14 +51,32 @@ public class Reunion implements Serializable {
         this.resume = resume;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "DATE_VALIDE")
+
+    @OneToOne(cascade = CascadeType.PERSIST)
     public DatePropose getDateValide() {
         return dateValide;
     }
 
     public void setDateValide(DatePropose dateValide) {
         this.dateValide = dateValide;
+    }
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    public DatePropose getLieuValide() {
+        return lieuValide;
+    }
+
+    public void setLieuValide(DatePropose lieuValide) {
+        this.lieuValide = lieuValide;
+    }
+
+    @OneToMany
+    public List<LieuPropose> getLieuProposes() {
+        return lieuProposes;
+    }
+
+    public void setLieuProposes(List<LieuPropose> lieuProposes) {
+        this.lieuProposes = lieuProposes;
     }
 
     public String getLienPad() {
@@ -74,7 +95,7 @@ public class Reunion implements Serializable {
     public void setSondages(List<Sondage> sondages) {
         this.sondages = sondages;
     }
-    @ManyToMany
+    @OneToMany
     public List<DatePropose> getDateProposes() {
         return dateProposes;
     }
@@ -95,4 +116,6 @@ public class Reunion implements Serializable {
     public void setAssidute(List<Assidute> assidute) {
         this.assidute = assidute;
     }
+
+
 }

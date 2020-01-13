@@ -1,16 +1,18 @@
 package domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class LieuPropose {
+public class LieuPropose implements Serializable {
     private Long id;
     private String lieu;
 
     public LieuPropose() {
+    }
+
+    public LieuPropose(String lieu) {
+        this.lieu = lieu;
     }
 
     @Id
@@ -23,6 +25,7 @@ public class LieuPropose {
         this.id = id;
     }
 
+    @Column(nullable=false)
     public String getLieu() {
         return lieu;
     }

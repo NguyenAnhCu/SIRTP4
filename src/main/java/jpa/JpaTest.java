@@ -35,7 +35,7 @@ public class JpaTest {
 		//		factory.close();
 	}
 
-	private void populateDataBase() {
+	private void populateDataBase() throws Exception {
 		Date toDay = new Date();
 		DatePropose datePropose = new DatePropose();
 		datePropose.setPause(true);
@@ -44,16 +44,28 @@ public class JpaTest {
 		lieuPropose.setLieu("PARIS");
 
 
+		Alimentation mangue = new Alimentation();
+		Alimentation poivre = new Alimentation();
+		mangue.setTypeAlimentation(TypeAlimentation.PREFERENCE);
+		mangue.setLibelle("Mange");
+		poivre.setLibelle("Mange");
+		poivre.setTypeAlimentation(TypeAlimentation.ALLERGIE);
+		manager.persist(mangue);
+		manager.persist(poivre);
+
+
 		Sondage sondage = new Sondage() ;
 		Utilisateur p1 = new Utilisateur();
 		p1.setEmail("kouassives@gmail.com");
 		p1.setNom("KOUASSI");
 		p1.setPreNom("Yves");
+		p1.addPrefereneces(mangue);
 		manager.persist(p1);
 		Utilisateur p2 = new Utilisateur();
 		p2.setEmail("kouassives@live.com");
 		p2.setNom("TI");
 		p2.setPreNom("ANAIS");
+		p2.addAllergies(poivre);
 		manager.persist(p2);
 		Reunion reunion = new Reunion();
 		reunion.setIntitule("RDV 1 : Projet PRO");
@@ -71,7 +83,7 @@ public class JpaTest {
 		r1.setReponsePK(reponsePK1);
 		r1.setParticipant(p1);
 		r1.setSondage(sondage);
-		r1.setDateReponse(datePropose);
+		r1.setLieuPropose(lieuPropose);
 		r2.setReponsePK(reponsePK2);
 		r2.setParticipant(p2);
 		r2.setSondage(sondage);
