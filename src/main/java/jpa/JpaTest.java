@@ -47,8 +47,8 @@ public class JpaTest {
 		Alimentation mangue = new Alimentation();
 		Alimentation poivre = new Alimentation();
 		mangue.setTypeAlimentation(TypeAlimentation.PREFERENCE);
-		mangue.setLibelle("Mange");
-		poivre.setLibelle("Mange");
+		mangue.setLibelle("Mangue");
+		poivre.setLibelle("Poivre");
 		poivre.setTypeAlimentation(TypeAlimentation.ALLERGIE);
 		manager.persist(mangue);
 		manager.persist(poivre);
@@ -77,14 +77,10 @@ public class JpaTest {
 		manager.persist(sondage);
 
 		Reponse r1 = new Reponse();
-		ReponsePK reponsePK1 = new ReponsePK(sondage.getId(),p1.getEmail());
 		Reponse r2 = new Reponse();
-		ReponsePK reponsePK2 = new ReponsePK(sondage.getId(),p2.getEmail());
-		r1.setReponsePK(reponsePK1);
 		r1.setParticipant(p1);
 		r1.setSondage(sondage);
 		r1.setLieuPropose(lieuPropose);
-		r2.setReponsePK(reponsePK2);
 		r2.setParticipant(p2);
 		r2.setSondage(sondage);
 		r2.setLieuPropose(lieuPropose);

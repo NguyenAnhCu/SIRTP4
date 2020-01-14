@@ -6,14 +6,14 @@ import java.io.Serializable;
 @Embeddable
 public class ReponsePK implements Serializable {
     private Long idSondage;
-    private String emailAuteur;
+    private String emailParticipant;
 
     public ReponsePK() {
     }
 
-    public ReponsePK(Long idSondage, String emailAuteur) {
+    public ReponsePK(Long idSondage, String emailParticipant) {
         this.idSondage = idSondage;
-        this.emailAuteur = emailAuteur;
+        this.emailParticipant = emailParticipant;
     }
 
     public Long getIdSondage() {
@@ -24,12 +24,12 @@ public class ReponsePK implements Serializable {
         this.idSondage = idSondage;
     }
 
-    public String getEmailAuteur() {
-        return emailAuteur;
+    public String getEmailParticipant() {
+        return emailParticipant;
     }
 
-    public void setEmailAuteur(String emailAuteur) {
-        this.emailAuteur = emailAuteur;
+    public void setEmailParticipant(String emailParticipant) {
+        this.emailParticipant = emailParticipant;
     }
 
     @Override

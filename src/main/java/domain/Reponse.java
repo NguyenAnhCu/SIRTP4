@@ -3,10 +3,15 @@ package domain;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * setSondage et setParticipant sont à utiliser pour la primaryKey
+ * pour les contraintes métiers sur le type de Reponse
+ * qui doit correspondre au type de Sondage
+ */
 @Entity
 public class Reponse implements Serializable {
 
-    protected ReponsePK reponsePK;
+    protected ReponsePK reponsePK = new ReponsePK();
     private Utilisateur participant;
     private Sondage sondage;
     private Type type;
@@ -45,6 +50,11 @@ public class Reponse implements Serializable {
         else throw new Exception("le Type de votre reponse n'est pas "+ type +",\nET type de Reponse attendu pour ce objet doit être "+sondage.getType());
     }
 
+    /**
+     * Le Getter de la clé primaire nécessaire à JPA
+     *
+     * @return
+     */
     @EmbeddedId
     protected ReponsePK getReponsePK() {
         return reponsePK;
@@ -55,17 +65,18 @@ public class Reponse implements Serializable {
     }
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "ID_UTILISATEUR",insertable = false, updatable = false)
+    @JoinColumn(name = "EMAILPARTICIPANT",insertable = false, updatable = false)
     public Utilisateur getParticipant() {
         return participant;
     }
 
     public void setParticipant(Utilisateur participant) {
         this.participant = participant;
+        reponsePK.setEmailParticipant(participant.getEmail());
     }
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "ID_SONDAGE",insertable = false, updatable = false)
+    @JoinColumn(name = "IDSONDAGE",insertable = false, updatable = false)
     public Sondage getSondage() {
         return sondage;
     }
@@ -74,6 +85,7 @@ public class Reponse implements Serializable {
         this.sondage = sondage;
         // Intégrité
         this.type = sondage.getType();
+        reponsePK.setIdSondage(sondage.getId());
     }
 
     @Enumerated(EnumType.STRING)
