@@ -4,7 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * setSondage et setParticipant sont à utiliser pour la primaryKey
+ * L'intiation d'un object Reponse passe par
+ * Reponse(Utilisateur participant, Sondage sondage)
  * pour les contraintes métiers sur le type de Reponse
  * qui doit correspondre au type de Sondage
  */
@@ -26,6 +27,9 @@ public class Reponse implements Serializable {
     public Reponse(Utilisateur participant, Sondage sondage) {
         this.participant = participant;
         this.sondage = sondage;
+        reponsePK = new ReponsePK(sondage.getId(),participant.getEmail());
+        type=sondage.getType();
+
     }
 
     @ManyToOne

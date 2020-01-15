@@ -62,7 +62,7 @@ public class JpaTest {
 		p1.addPrefereneces(mangue);
 		manager.persist(p1);
 		Utilisateur p2 = new Utilisateur();
-		p2.setEmail("kouassives@live.com");
+		p2.setEmail("dumas@live.com");
 		p2.setNom("TI");
 		p2.setPreNom("ANAIS");
 		p2.addAllergies(poivre);
@@ -76,24 +76,17 @@ public class JpaTest {
 		sondage.setType(Type.LIEU);
 		manager.persist(sondage);
 
-		Reponse r1 = new Reponse();
-		Reponse r2 = new Reponse();
-		r1.setParticipant(p1);
-		r1.setSondage(sondage);
+		Reponse r1 = new Reponse(p1,sondage);
+		Reponse r2 = new Reponse(p2,sondage);
 		r1.setLieuPropose(lieuPropose);
-		r2.setParticipant(p2);
-		r2.setSondage(sondage);
 		r2.setLieuPropose(lieuPropose);
-
-
-
 
 
 		// Creation participant pour generer les id
 		manager.persist(reunion);
-        manager.persist(datePropose);
-        manager.persist(lieuPropose);
-        manager.persist(r1);
+		manager.persist(datePropose);
+		manager.persist(lieuPropose);
+		manager.persist(r1);
         manager.persist(r2);
 		// Creation d'une assidute
 		Assidute assidute = new Assidute();
